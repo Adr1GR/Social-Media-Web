@@ -1,0 +1,35 @@
+version: "3.9"
+
+services:
+  php-apache:
+      image: php-for-dwes-dwesgram
+      container_name: php-apache-dwesgram
+      depends_on:
+        - db
+      volumes:
+        - ./src:/var/www/html
+      ports:
+        - 8888:80
+      extra_hosts:
+        - host.docker.internal:host-gateway
+
+  db:
+      image: mariadb
+      container_name: db-dwesgram
+      restart: always
+      environment:
+        MARIADB_ROOT_PASSWORD: "dwes"
+        MARIADB_DATABASE: "dwes"
+        MARIADB_USER: "dwes"
+        MARIADB_PASSWORD: "dwes"
+      volumes:
+        - ./mariadbdata:/var/lib/mysql
+
+  adminer:
+    image: adminer
+    container_name: adminer-dwesgram
+    environment:
+      ADMINER_DEFAULT_SERVER: db
+    restart: always
+    ports:
+      - 8889:8080

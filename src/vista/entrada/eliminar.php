@@ -1,0 +1,1 @@
+<h3>Entrada eliminada correctamente</h3>
