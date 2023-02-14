@@ -18,11 +18,13 @@ if (!empty($datosParaVista['datos'])) {
         echo '<form action="index.php?controlador=megusta&accion=crearMeGusta" method="post" enctype="multipart/form-data">';
         echo '<input type="hidden" name="idUsuario" value="' . ($sesion->haySesion() ? $sesion->getId() : null) . '">';
         echo '<input type="hidden" name="idPublicacion" value="' . $idPublicacion . '">';
+        echo '<input type="hidden" name="vista" value="' . $vista . '">';
         echo '<button type="submit" class="btn btn-primary">Like</button> </form>';
     } else if ($sesion->haySesion() && $sesion->getId() != $autorId){
         echo '<form action="index.php?controlador=megusta&accion=eliminarMeGusta" method="post" enctype="multipart/form-data">';
         echo '<input type="hidden" name="idUsuario" value="' . ($sesion->haySesion() ? $sesion->getId() : null) . '">';
         echo '<input type="hidden" name="idPublicacion" value="' . $idPublicacion . '">';
+        echo '<input type="hidden" name="vista" value="' . $vista . '">';
         echo '<button type="submit" class="btn btn-danger">Dislike</button> </form>';
     }
     echo '<p>Likes: ' . MeGustaBd::countMegustaFromPost($idPublicacion);

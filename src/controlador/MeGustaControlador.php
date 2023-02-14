@@ -47,7 +47,13 @@ class MeGustaControlador extends Controlador
         }
 
         MeGustaBd::crearMeGusta($meGusta);
-        header('Location: index.php?controlador=entrada&accion=detalle&id=' . $meGusta->getIdPublicacion());
+
+        if (isset($_POST['vista']) && $_POST['vista'] == 'vista/entrada/detalle.php') {
+            header('Location: index.php?controlador=entrada&accion=detalle&id=' . $meGusta->getIdPublicacion());
+        } else  if (isset($_POST['vista']) && $_POST['vista'] == 'vista/entrada/lista.php') {
+            header('Location: index.php');
+        }
+
         return $meGusta;
     }
 
@@ -80,14 +86,20 @@ class MeGustaControlador extends Controlador
             return null;
         }
 
-        // Comprobamos que no exista el megusta
+        // Comprobamos que exista el megusta
         if (!MeGustaBd::checkMeGusta($meGusta->getIdUsuario(), $meGusta->getIdPublicacion())) {
             $this->vista = 'errores/403';
             return null;
         }
 
         MeGustaBd::eliminarMeGusta($meGusta);
-        header('Location: index.php?controlador=entrada&accion=detalle&id=' . $meGusta->getIdPublicacion());
+
+        if (isset($_POST['vista']) && $_POST['vista'] == 'vista/entrada/detalle.php') {
+            header('Location: index.php?controlador=entrada&accion=detalle&id=' . $meGusta->getIdPublicacion());
+        } else  if (isset($_POST['vista']) && $_POST['vista'] == 'vista/entrada/lista.php') {
+            header('Location: index.php');
+        }
+
         return $meGusta;
     }
 }

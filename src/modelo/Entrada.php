@@ -13,7 +13,7 @@ class Entrada extends Modelo
         private string|null $imagen = null,
         private string|null $fechaCreacion = null,
         private int|null $autor = null,
-        private int|null $likes = null
+        //private int|null $likes = null
     ) {
         $this->errores = [
             'texto' => $texto === null || empty($texto) ? 'El texto no puede estar vacío' : null,

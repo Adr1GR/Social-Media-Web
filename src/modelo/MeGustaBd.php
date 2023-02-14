@@ -47,12 +47,10 @@ class MeGustaBd
             return null;
         }
     }
-
+    
     public static function checkMeGusta($idUsuario, $idPublicacion): bool|null
     {
         try {
-            /* $idUsuario = $meGusta->getIdUsuario();
-            $idPublicacion = $meGusta->getIdPublicacion(); */
             $conexion = BaseDatos::getConexion();
             $sentencia = $conexion->prepare("select * from megusta where usuario = ? and entrada = ?");
             $sentencia->bind_param("ii", $idUsuario, $idPublicacion);
